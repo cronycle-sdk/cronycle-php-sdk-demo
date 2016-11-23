@@ -1,0 +1,12 @@
+{
+    "name": "cronycle/cronycle-php-sdk-demo",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/cronycle/cronycle-php-sdk"
+        }
+    ],
+    "require": {
+        "cronycle/cronycle-php-sdk": "dev-master"
+    }
+}
