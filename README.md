@@ -1,1 +1,3 @@
-# cronycle-php-sdk-demo
+# Cronycle PHP SDK demo
+
+Demo provides basic usage of the library.  
