@@ -16,7 +16,7 @@ try
 	$boardId = $boards[0]['id'];
 
 	$board = $API->getBoardDetails( $boardId );
-	$articles = $API->getBoardArticles( $boardId );
+	$articles = $API->getBoardArticles( $boardId, [ 'per_page' => 2, 'page' => 1, ] );
 
 	echo '<pre>';
 	var_dump( $boards );
