@@ -1,5 +1,7 @@
 <?php
 
+require_once 'vendor/autoload.php';
+
 try {
 	$ticket = $_GET['ticket'] ?? '';
 
@@ -7,21 +9,14 @@ try {
 	if ( !$ticket )
 		throw new \Exception( 'Something went wrong during auth process...', 403 );
 
-	// Getting user object from backend
-	$ch = curl_init( 'https://api.cronycle.com/v5/auth/google_oauth2/post-auth?ticket='.$ticket );
-	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+	$API = new \Cronycle\Api();
+	$response = $API->postAuth( 'google_oauth2', $ticket );
 
-	$response = curl_exec( $ch );
-	$json = json_decode( $response, true );
-
-	curl_close( $ch );
-
-	if ( $json === null || !isset( $json[0]['auth_token'] ) )
+	if ( $response === null || !isset( $response[0]['auth_token'] ) )
 		throw new \Exception( 'Authentication failed...', 403 );
 
 	echo '<pre>';
-	var_dump( $json );
+	var_dump( $response );
 	echo '</pre>';
 }
 catch ( \Exception $e )
