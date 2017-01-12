@@ -4,13 +4,16 @@ require_once 'vendor/autoload.php';
 
 try {
 	$ticket = $_GET['ticket'] ?? '';
+	$provider = $_GET['provider'] ?? '';
 
-	// If no state or code throw an exception
 	if ( !$ticket )
 		throw new \Exception( 'Something went wrong during auth process...', 403 );
 
+	if ( !$provider )
+		throw new \Exception( 'Social sign in provider missed...', 403 );
+
 	$API = new \Cronycle\Api();
-	$response = $API->postAuth( 'twitter2', $ticket );
+	$response = $API->postAuth( $provider, $ticket );
 
 	if ( $response === null || !isset( $response[0]['auth_token'] ) )
 		throw new \Exception( 'Authentication failed...', 403 );
